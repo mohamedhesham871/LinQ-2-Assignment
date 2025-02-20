@@ -57,12 +57,18 @@ namespace LinQ_2_Assignment
 
             #endregion
             #region 4:4. Get the total of the numbers in an array.
-            int[] Arr = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
-             var res=Arr.Count();
-            Console.WriteLine(res);//10 Element
-            res = Arr.Sum();
-            Console.WriteLine(res);//Sum of Element
+            //int[] Arr = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+            // var res=Arr.Count();
+            //Console.WriteLine(res);//10 Element
+            //res = Arr.Sum();
+            //Console.WriteLine(res);//Sum of Element
 
+            #endregion
+
+            var ArrayOfString = File.ReadAllLines("dictionary_english.txt").ToArray();
+            #region 5. Get the total number of characters of all words in dictionary_english.txt (Read dictionary_english.txt into Array of String First).
+            var summ =ArrayOfString.Sum(a=>a.Length);
+            Console.WriteLine(summ);
             #endregion
             /*
            
