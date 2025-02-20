@@ -76,20 +76,29 @@ namespace LinQ_2_Assignment
             //Console.WriteLine(shortest.Length);
             #endregion
             #region 7:Get the length of the longest word in dictionary_english.txt 
-            var Longest = ArrayOfString.OrderBy(x => x.Length).LastOrDefault();
-            Console.WriteLine(Longest.Length);
+            //var Longest = ArrayOfString.OrderBy(x => x.Length).LastOrDefault();
+            //Console.WriteLine(Longest.Length);
             #endregion
 
             #region 8:Get the average length of the words in dictionary_english.txt
-            var Avg = ArrayOfString.Average(x => x.Length);
-            Console.WriteLine(Avg);
+            //var Avg = ArrayOfString.Average(x => x.Length);
+            //Console.WriteLine(Avg);
             #endregion
             #region 9: Get the total units in stock for each product category.
-            var res= ProductList.GroupBy(p=>p.Category).Select(p=>new {CatName=p.Key ,inStock =p.Count(p=>p.UnitsInStock>0)});
+            //var res= ProductList.GroupBy(p=>p.Category).Select(p=>new {CatName=p.Key ,inStock =p.Count(p=>p.UnitsInStock>0)});
+            //foreach (var item in res)
+            //{
+            //    Console.WriteLine(item);
+            //}   
+            #endregion
+
+            #region 10: Get the cheapest price among each category's products
+            var res = ProductList.GroupBy(p => p.Category).Select(p => new { CatName = p.Key, Cheapest = p.Min(p => p.UnitPrice)});
             foreach (var item in res)
             {
                 Console.WriteLine(item);
-            }   
+            }
+
             #endregion
             /*
            
