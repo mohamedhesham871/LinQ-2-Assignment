@@ -67,8 +67,13 @@ namespace LinQ_2_Assignment
 
             var ArrayOfString = File.ReadAllLines("dictionary_english.txt").ToArray();
             #region 5. Get the total number of characters of all words in dictionary_english.txt (Read dictionary_english.txt into Array of String First).
-            var summ =ArrayOfString.Sum(a=>a.Length);
-            Console.WriteLine(summ);
+            //var summ =ArrayOfString.Sum(a=>a.Length);
+            //Console.WriteLine(summ);
+            #endregion
+
+            #region 6:Get the length of the shortest word in dictionary_english.txt 
+            var shortest=ArrayOfString.OrderBy(x => x.Length).FirstOrDefault();
+            Console.WriteLine(shortest.Length);
             #endregion
             /*
            
