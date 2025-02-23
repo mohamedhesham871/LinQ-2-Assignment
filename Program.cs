@@ -127,21 +127,35 @@ namespace LinQ_2_Assignment
             #endregion
             #region  13. Get the products with the most expensive price in each category.
 
+            //var MostExpensive = from p in ProductList
+            //                    group p by p.Category into cat
+            //                    let max = cat.Max(p => p.UnitPrice)
+            //                  from x in cat
+            //                  where x.UnitPrice == max
+            //                    select new
+            //                    {
+            //                        catName = cat.Key,
+            //                        ProductName = x.ProductName,
+            //                        ProductPrice=max
+            //                    };
+            //foreach (var item in MostExpensive)
+            //    Console.WriteLine(item);
+
+            #endregion
+
+            #region 14. Get the average price of each category's products.
             var MostExpensive = from p in ProductList
                                 group p by p.Category into cat
-                                let max = cat.Max(p => p.UnitPrice)
-                              from x in cat
-                              where x.UnitPrice == max
+                                let max = cat.Average(p => p.UnitPrice)
                                 select new
                                 {
                                     catName = cat.Key,
-                                    ProductName = x.ProductName,
-                                    ProductPrice=max
+                                    ProductPrice = max
                                 };
             foreach (var item in MostExpensive)
                 Console.WriteLine(item);
 
-        #endregion
+            #endregion
             /*
                 *  11. Get the products with the cheapest price in each category (Use Let)
                 12. Get the most expensive price among each category's products.
@@ -149,7 +163,7 @@ namespace LinQ_2_Assignment
                 14. Get the average price of each category's products.
 
             */
-                                    #endregion
+            #endregion
         }
     }
 }
