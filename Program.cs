@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Xml;
@@ -298,6 +299,41 @@ namespace LinQ_2_Assignment
             //-------Another Solve ------
             res17 = CustomerList.SelectMany(x => x.Orders).Where(y => y.OrderDate >= new DateTime(1998, 1, 1));
             //foreach( var x in res17 )
+            //    Console.WriteLine(x);
+            #endregion
+            #endregion
+
+            #region LINQ - Set Operators
+            #region 1. Find the unique Category names from Product List
+            var res31 = ProductList.Select(x => x.Category).Distinct();
+
+            //foreach(var i in res31)
+            //    Console.WriteLine(i);
+            #endregion
+            #region 2: Produce a Sequence containing the unique first letter from both product and customer names.
+            var res32 = ProductList.Select((x) => x.ProductName[0]).Distinct();
+            var res32_ = CustomerList.Select((x) => x.CustomerName[0]).Distinct();
+            //foreach ( var x in res32)
+            //    Console.WriteLine(x);
+            #endregion
+            #region 3. Create one sequence that contains the common first letter from both product and customer names.
+            var res33 = ProductList.Select(x => x.ProductName[0]).Intersect(CustomerList.Select(x => x.CustomerName[0]));
+            //foreach( var x in res33)
+            //    Console.WriteLine(x);
+            #endregion
+            #region 4.Create one sequence that contains the first letters of product names that are not also first letters of customer names.
+            var res34 = ProductList.Select(x => x.ProductName[0]).Except(CustomerList.Select(x => x.CustomerName[0]));
+           
+            foreach( var x in res34 )
+                Console.WriteLine(x);
+
+            #endregion
+            #region 5:Create one sequence that contains the last Three Characters in each name of all customers and products, including any duplicates
+           //VIP
+            var res35 = ProductList.Select(x => x.ProductName.Length>3 ? x.ProductName[^3..] : x.ProductName)
+                .Union(
+                CustomerList.Select(x => x.CustomerName.Length > 3 ? x.CustomerName[^3..] : x.CustomerName));
+            //foreach(var x in res35 )
             //    Console.WriteLine(x);
             #endregion
             #endregion
