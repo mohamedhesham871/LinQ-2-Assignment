@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Xml;
 using static LinQ_2_Assignment.ListGenerators;
@@ -232,6 +233,71 @@ namespace LinQ_2_Assignment
 
             var res08 = Arr08.Where(x => x[1] == 'i').Reverse().ToList();
             //foreach(var x in res08)
+            //    Console.WriteLine(x);
+            #endregion
+            #endregion
+
+            #region LINQ – Transformation Operators
+            #region  1:  Return a sequence of just the names of a list of products.
+            var res11 = ProductList.Select(x => x.ProductName).ToList();
+            //foreach(var item in res11)
+            //    Console.WriteLine(item);
+            #endregion
+            #region 2:2. Produce a sequence of the uppercase and lowercase versions of each word in the original array (Anonymous Types).
+            
+            string[] words = { "aPPLE", "BlUeBeRrY", "cHeRry" };
+            var res12=words.Select(x=> new  { Lower=x.ToLower(), Upper=x.ToUpper() }).ToList();
+
+            //foreach(var word in res12)
+            //    Console.WriteLine(word);
+
+            #endregion
+            #region 3:Produce a sequence containing some properties of Products, including UnitPrice which is renamed to Price in the resulting type.
+            var res13=ProductList.Select(x=>new {
+                ProductName=x.ProductName , 
+                ProductID=x.ProductID,
+                Price =x.UnitPrice ,
+                UnitsInStock= x.UnitsInStock
+            }).ToList();
+            #endregion
+            #region 4:4. Determine if the value of int in an array matches their position in the array.
+            int[] Arr14 = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+            var res14 = Arr14.Select((x, i) => x == i);
+            //foreach(var x in res14)
+            //    Console.WriteLine(x);
+
+
+            #endregion
+            #region 5: Returns all pairs of numbers from both arrays such that the number from numbersA is less than the number from numbersB.
+            int[] numbersA = { 0, 2, 4, 5, 6, 8, 9 };
+            int[] numbersB = { 1, 3, 5, 7, 8 };
+
+            var res15 = from x in numbersA
+                        from y in numbersB
+                        where x.CompareTo(y) == -1
+                        select $"{x} is less than {y}";
+            //foreach(var i in res15)
+            //    Console.WriteLine(i);
+
+            #endregion 
+            #region 6: Select all orders where the order total is less than 500.00.
+            var res16 = from x in CustomerList
+                        from y in x.Orders
+                        where y.Total < 500
+                        select y;
+            //foreach( var x in res16 )
+            //    Console.WriteLine(x);
+
+
+            #endregion
+            #region 7. Select all orders where the order was made in 1998 or later.
+            var res17 = from x in CustomerList
+                        from y in x.Orders
+                        where y.OrderDate >= new DateTime(1998, 1, 1)
+                        select y;
+            //-------Another Solve ------
+            res17 = CustomerList.SelectMany(x => x.Orders).Where(y => y.OrderDate >= new DateTime(1998, 1, 1));
+            //foreach( var x in res17 )
             //    Console.WriteLine(x);
             #endregion
             #endregion
