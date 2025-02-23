@@ -93,14 +93,30 @@ namespace LinQ_2_Assignment
             #endregion
 
             #region 10: Get the cheapest price among each category's products
-            var res = ProductList.GroupBy(p => p.Category).Select(p => new { CatName = p.Key, Cheapest = p.Min(p => p.UnitPrice)});
-            foreach (var item in res)
+            //var res = ProductList.GroupBy(p => p.Category).Select(p => new { CatName = p.Key, Cheapest = p.Min(p => p.UnitPrice)});
+            //foreach (var item in res)
+            //{
+            //    Console.WriteLine(item);
+            //}
+
+            #endregion
+
+            #region 11 :Get the products with the cheapest price in each category (Use Let)
+            var lessproduct = from p in ProductList
+                              group p by p.Category into x
+                              let min = x.Min(p => p.UnitPrice)
+                              select new { cat = x.Key, Price = min };
+                        
+            foreach (var item in lessproduct)
             {
                 Console.WriteLine(item);
             }
-
             #endregion
             /*
+             *  11. Get the products with the cheapest price in each category (Use Let)
+                12. Get the most expensive price among each category's products.
+                13. Get the products with the most expensive price in each category.
+                14. Get the average price of each category's products.
            
             */
             #endregion
