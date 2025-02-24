@@ -1,9 +1,12 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.Intrinsics.X86;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Xml;
 using static LinQ_2_Assignment.ListGenerators;
+using static System.Net.Mime.MediaTypeNames;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace LinQ_2_Assignment
 {
@@ -324,9 +327,8 @@ namespace LinQ_2_Assignment
             #region 4.Create one sequence that contains the first letters of product names that are not also first letters of customer names.
             var res34 = ProductList.Select(x => x.ProductName[0]).Except(CustomerList.Select(x => x.CustomerName[0]));
            
-            foreach( var x in res34 )
-                Console.WriteLine(x);
-
+            //foreach( var x in res34 )
+            //    Console.WriteLine(x);
             #endregion
             #region 5:Create one sequence that contains the last Three Characters in each name of all customers and products, including any duplicates
            //VIP
@@ -371,8 +373,45 @@ namespace LinQ_2_Assignment
 
             #endregion
             #endregion
-        }
 
+            #region LINQ – Grouping Operators
+            #region Use group by to partition a list of numbers by their remainder when divided by 5
+            List<int> numbers = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+            var final01 = numbers.GroupBy(x => x % 5);
+            //foreach(var x in final01)
+            //{
+            //    Console.WriteLine($"Group :"+x.Key);
+            //    foreach(var z in x)
+            //        Console.WriteLine(z);
+            //    Console.WriteLine("--");
+
+            //}
+
+
+            #endregion
+            #region Uses group by to partition a list of words by their first letter.
+            var final02 = ArrayOfString.GroupBy(x => x[0]);
+            //foreach(var x in final02)
+            //{
+            //    Console.WriteLine($"Group with char: {x.Key}");
+            //    foreach(var c in x)
+            //        Console.WriteLine(c);
+            //}
+
+            #endregion
+            #region 3-Use Group By with a custom comparer that matches words that are consists of the same Characters Together
+            string[] Arr09 = { "from", "salt", "earn", " last", "near", "form" };//[vip]
+            var final03 = Arr09.GroupBy( w => new string(w.OrderBy(c => c).ToArray()));
+            //foreach(var x in final03)
+            //{
+            //    Console.WriteLine("...");
+            //    foreach(var y in x)
+            //        Console.WriteLine(y);
+            //}
+            #endregion
+            #endregion
+        }
+       
 
     }
 }
