@@ -337,6 +337,40 @@ namespace LinQ_2_Assignment
             //    Console.WriteLine(x);
             #endregion
             #endregion
+
+            #region LINQ - Quantifiers
+            #region 1. Determine if any of the words in dictionary_english.txt (Read dictionary_english.txt into Array of String First) contain the substring 'ei'.
+            var resxx = ArrayOfString.Any(x=>x.Contains("ei"));
+            //Console.WriteLine(resxx);
+            var res41 = ArrayOfString.Where(x => x.Contains("ei"));
+            // foreach(var c in res41)
+            //      Console.WriteLine(c);
+            #endregion
+            #region 2. Return a grouped a list of products only for categories that have at least one product that is out of stock.
+
+            var resyy = ProductList.GroupBy(x => x.Category).Where(x=>x.Any(x=>x.UnitsInStock==0));
+            //foreach( var x in resyy )
+            //{
+            //    Console.WriteLine(x.Key);
+            //    foreach (var t in x)
+            //        Console.WriteLine(t);
+            //    Console.WriteLine("---");
+
+            //}
+
+            #endregion
+            #region 3.Return a grouped a list of products only for categories that have all of their products in stock.
+            var resy3 = ProductList.GroupBy(x => x.Category).Where(x => x.All(x => x.UnitsInStock > 0));
+            //foreach (var x in resy3)
+            //{
+            //    Console.WriteLine(x.Key);
+            //    foreach (var t in x)
+            //        Console.WriteLine(t);
+            //    Console.WriteLine("---");
+            //}
+
+            #endregion
+            #endregion
         }
 
 
